@@ -27,6 +27,20 @@ function App() {
     setPaused((p) => !p);
   };
 
+   // Load draft and theme from localStorage on mount
+  useEffect(() => {
+    const savedDraft = localStorage.getItem("draft");
+    if (savedDraft) setDraft(savedDraft);
+
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) setTheme(savedTheme);
+  }, []);
+
+  // Save draft to localStorage on every change
+  useEffect(() => {
+    localStorage.setItem("draft", draft);
+  }, [draft]);
+
   // Show toast on save status changes
   useEffect(() => {
     if (status === "saved") {
